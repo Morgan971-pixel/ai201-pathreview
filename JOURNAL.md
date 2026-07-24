@@ -65,3 +65,19 @@ The regex fix is one line. The work for next week is:
 |---|---|
 | `safety/pii_scrubber.py` | Update `phone_us` regex in `PII_PATTERNS` |
 | `tests/unit/test_pii_scrubber.py` | Possibly add one additional test for a space-separated format if the existing four do not already cover it |
+
+---
+
+## Week 8 — Reproduction & Solution Planning
+
+**Reproduction commit link:** https://github.com/Morgan971-pixel/ai201-pathreview/commit/edf7188
+
+**Reproduction summary:**
+Ran `pytest tests/unit/test_pii_scrubber.py -v` on the unmodified codebase and observed 5 failures: the four tests cited in the issue (`test_us_phone_number_redaction`, `test_us_phone_formats`, `test_detect_phone_pii`, `test_phone_at_start_of_text`) plus a fifth (`test_mixed_pii_and_text`) caused by a related false-positive bug in the street address pattern.
+
+**PLAN.md link:** https://github.com/Morgan971-pixel/ai201-pathreview/blob/fix/146-pii-scrubber-parenthesized-phone-format/PLAN.md
+
+**Walkthrough video (recommended):** N/A
+
+**Blockers or open questions:**
+None. The fix has been implemented and all 25 tests pass.
