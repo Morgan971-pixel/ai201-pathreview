@@ -81,3 +81,36 @@ Ran `pytest tests/unit/test_pii_scrubber.py -v` on the unmodified codebase and o
 
 **Blockers or open questions:**
 None. The fix has been implemented and all 25 tests pass.
+
+---
+
+## Week 9 — Solution Building & PR Submission
+
+### Check-in 1 (mid-week)
+
+**Current progress:**
+Fix implemented and all 25 unit tests passing. PLAN.md written. Public fork created at Morgan971-pixel/pathreview and branch pushed.
+
+**Next steps:**
+Open PR against ascherj/pathreview, update JOURNAL.md with PR link, submit.
+
+**Blockers:**
+None.
+
+---
+
+### Check-in 2 (end of week)
+
+**PR link:** https://github.com/ascherj/pathreview/pull/482
+
+**Branch:** fix/146-pii-scrubber-parenthesized-phone-format
+
+**What you built:**
+Fixed the phone_us regex in PIIScrubber so it correctly matches parenthesized US phone numbers like (555) 123-4567 by replacing the leading \b with a negative lookbehind and expanding the separator to include spaces. Also fixed a pre-existing false-positive bug in the street_address pattern where short suffixes like Pl were matching inside unrelated words.
+
+**Tests added or updated:**
+No new tests written — 5 pre-existing failing tests in tests/unit/test_pii_scrubber.py now pass as a result of the fix.
+
+**Self-review confirmation:** [x] make check passes (4 pre-existing failures, 0 new)  [x] make test-unit passes (25/25)
+
+**Draft PR feedback received from:** none
