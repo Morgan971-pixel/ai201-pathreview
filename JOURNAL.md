@@ -114,3 +114,52 @@ No new tests written — 5 pre-existing failing tests in tests/unit/test_pii_scr
 **Self-review confirmation:** [x] make check passes (4 pre-existing failures, 0 new)  [x] make test-unit passes (25/25)
 
 **Draft PR feedback received from:** none
+
+---
+
+## Week 10 — Iteration & Reflection
+
+### Reviewer feedback
+
+**Feedback received:** [x] No — still awaiting review
+
+**Summary of feedback:**
+No reviewer feedback received. Per the Su26 note, reviewer feedback is not
+a feature in Summer 2026.
+
+**How you responded:**
+N/A
+
+---
+
+### Reflection
+
+**What was harder than you expected?**
+Understanding why \b failed before ( required tracing the regex engine position
+by position. \b needs a transition between a word character and a non-word
+character to anchor -- but ( is non-word and the space before it is also
+non-word, so no transition exists and the match never starts. That's not
+obvious until you trace it manually.
+
+**What did you learn about working in a large codebase?**
+Pre-existing failures need a baseline. Before touching anything, I ran ruff
+against the original file on main and found 4 errors already there. Without
+that, I couldn't have honestly written "0 new failures" in the PR -- I would
+have had no way to know what I caused vs what was already broken.
+
+**How did AI tools help — and where did they fall short?**
+AI was useful for explaining the regex engine behavior step by step. It fell
+short when make check broke because the project's Makefile expected a .venv
+that didn't exist -- no explanation helped there, I just had to read the
+Makefile directly and run the tools myself.
+
+**What would you do differently if you started over?**
+Run the full test suite before reading the source code. The issue listed 4
+failing tests but there were actually 5. That 5th failure exposed the
+street_address bug. Running only the listed tests would have missed it.
+
+**What are you most proud of from this module?**
+Finding the street_address false positive that wasn't in the issue. The word
+"applications" was being partially redacted because Pl inside it was matching
+as a street suffix. One \b at the end of the pattern fixed it -- but only
+because I ran the full test file instead of just the 4 listed tests.
